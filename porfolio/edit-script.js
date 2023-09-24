@@ -41,13 +41,25 @@ function setFormElementByData(parameter){
     nameEl.value = aboutMe.name;
 }
 
-function save(){
+async function save(event) {
+    // Varsayılan davranışı engelle
+    event.preventDefault();
+    
     const nameEl = document.getElementById("name");
-    aboutMe.name = nameEl.value;    
-    fetch("./data.json", {
+      // Eğer aboutMe bir üst kapsamda tanımlanmışsa, bu satıra gerek yoktur.
+    aboutMe.name = nameEl.value;
+
+    // Diğer alanları da almak için kod ekleyebilirsiniz. Örneğin:
+    // aboutMe.profession = document.getElementById("profession").value;
+    // aboutMe.avatar = document.getElementById("avatar").value;
+    // ...
+
+    console.log(aboutMe);
+    await fetch("http://localhost:3000/aboutMe", {
         method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(aboutMe)
-    }).then(res=> {
-        getData()
     });
 }

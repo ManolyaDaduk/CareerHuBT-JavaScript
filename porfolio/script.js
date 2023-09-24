@@ -1,11 +1,17 @@
 getData();
 function getData(){
     fetch("./data.json")
-    .then(res=> res.json())
-    .then(data=> {
-        setAboutInformationToElement(data.aboutMe);
-        setNavigationToElement(data.navigations);
-    });
+        .then(res=> res.json())
+        .then(data=> {
+            setAboutInformationToElement(data.aboutMe);
+            setNavigationToElement(data.navigations);
+
+            document.querySelector("nav").style.display = "flex";
+            document.querySelector(".container").style.display = "block";
+            document.querySelector(".container-loader").style.display = "none";
+
+        });
+   
 }
 
 function setAboutInformationToElement(aboutMe) {
